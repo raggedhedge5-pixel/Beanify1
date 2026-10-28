@@ -1,0 +1,11 @@
+modLoader = "javafml"
+loaderVersion = "[${forge_major},)"
+license = "MIT"
+
+[[mods]]
+modId = "beanify"
+version = "${version}"
+displayName = "Beanify"
+description = '''
+Everyone becomes a bean: no arms, no leg swing, held items still visible. Client-side only.
+'''

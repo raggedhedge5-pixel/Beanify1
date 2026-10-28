@@ -612,7 +612,7 @@
     },
     {
       "id": "forge-26.1",
-      "project": "forge",
+      "project": "forge-unobf",
       "loaders": [
         "forge"
       ],
@@ -627,12 +627,11 @@
         "26.1",
         "26.1.1",
         "26.1.2"
-      ],
-      "unobfuscated": true
+      ]
     },
     {
       "id": "forge-26.2",
-      "project": "forge",
+      "project": "forge-unobf",
       "loaders": [
         "forge"
       ],
@@ -645,12 +644,11 @@
       "range_label": "26.2",
       "game_versions": [
         "26.2"
-      ],
-      "unobfuscated": true
+      ]
     },
     {
       "id": "forge-26.3",
-      "project": "forge",
+      "project": "forge-unobf",
       "loaders": [
         "forge"
       ],
@@ -663,8 +661,7 @@
       "range_label": "26.3",
       "game_versions": [
         "26.3"
-      ],
-      "unobfuscated": true
+      ]
     }
   ]
 }

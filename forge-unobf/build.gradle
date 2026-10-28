@@ -1,0 +1,74 @@
+// Forge builds for Minecraft 26.x (unobfuscated game: no mappings, no remapping), using Architectury Loom's
+// no-remap plugin. Build one target:   gradle build -PbeanTarget=forge-26.2
+// Targets live in ../build-matrix.json
+import groovy.json.JsonSlurper
+
+plugins {
+    id 'java'
+    id 'dev.architectury.loom-no-remap' version "${loom_version}"
+}
+
+def matrix = new JsonSlurper().parse(file("${rootDir}/../build-matrix.json"))
+def targetId = findProperty('beanTarget')
+def cfg = targetId ? matrix.targets.find { it.id == targetId } : matrix.targets.find { it.project == projectDir.name }
+if (cfg == null) {
+    throw new GradleException("Unknown beanTarget '${targetId}'. Valid ids: ${matrix.targets.findAll { it.project == projectDir.name }*.id}")
+}
+logger.lifecycle("Beanify target ${cfg.id}: Minecraft ${cfg.minecraft_version}, Forge ${cfg.forge_version}, Java ${cfg['java']}, mixin variant ${cfg.mixin_variant}")
+
+version = project.mod_version
+group = 'dev.beanify'
+
+base {
+    archivesName = "beanify-forge-${cfg.range_label}"
+}
+
+loom {
+    forge {
+        mixinConfig 'beanify.mixins.json'
+    }
+}
+
+repositories {
+    maven { url 'https://maven.minecraftforge.net/' }
+    mavenCentral()
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${cfg.minecraft_version}"
+    forge "net.minecraftforge:forge:${cfg.minecraft_version}-${cfg.forge_version}"
+}
+
+sourceSets {
+    main {
+        java.srcDir "${rootDir}/../common/${cfg.mixin_variant}/java"
+        resources.srcDir "${rootDir}/../common/${cfg.mixin_variant}/resources"
+    }
+}
+
+processResources {
+    def props = [
+        version     : project.version.toString(),
+        forge_major : cfg.forge_major.toString(),
+        mixin_compat: cfg.mixin_compat,
+    ]
+    inputs.properties props
+    filesMatching(['META-INF/mods.toml', 'beanify.mixins.json']) {
+        expand props
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = cfg['java'] as Integer
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion(cfg['java'])
+    targetCompatibility = JavaVersion.toVersion(cfg['java'])
+}
+
+jar {
+    from('../LICENSE') {
+        rename { "${it}_beanify" }
+    }
+}
