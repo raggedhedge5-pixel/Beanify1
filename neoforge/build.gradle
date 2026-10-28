@@ -1,0 +1,81 @@
+// NeoForge builds for Minecraft 1.21 - 26.3 (Mojang names at runtime, so the same mixin sources as Fabric).
+// Build one target:   gradle build -PbeanTarget=neoforge-1.21.1
+// Targets live in ../build-matrix.json
+import groovy.json.JsonSlurper
+
+plugins {
+    id 'java'
+    id 'net.neoforged.moddev' version "${moddev_version}"
+}
+
+def matrix = new JsonSlurper().parse(file("${rootDir}/../build-matrix.json"))
+def targetId = findProperty('beanTarget')
+def cfg = targetId ? matrix.targets.find { it.id == targetId } : matrix.targets.find { it.project == projectDir.name }
+if (cfg == null) {
+    throw new GradleException("Unknown beanTarget '${targetId}'. Valid ids: ${matrix.targets.findAll { it.project == projectDir.name }*.id}")
+}
+logger.lifecycle("Beanify target ${cfg.id}: NeoForge ${cfg.neoforge_version}, Java ${cfg['java']}, mixin variant ${cfg.mixin_variant}")
+
+version = project.mod_version
+group = 'dev.beanify'
+
+base {
+    archivesName = "beanify-neoforge-${cfg.range_label}"
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'Sponge'
+        url = 'https://repo.spongepowered.org/repository/maven-public/'
+    }
+}
+
+neoForge {
+    version = cfg.neoforge_version
+    mods {
+        beanify {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+dependencies {
+    // Only the annotations / CallbackInfo are needed at compile time; NeoForge ships Mixin at runtime.
+    compileOnly 'org.spongepowered:mixin:0.8.5'
+}
+
+sourceSets {
+    main {
+        java.srcDir "${rootDir}/../common/${cfg.mixin_variant}/java"
+        resources.srcDir "${rootDir}/../common/${cfg.mixin_variant}/resources"
+    }
+}
+
+processResources {
+    def props = [
+        version            : project.version.toString(),
+        neoforge_dependency: cfg.neoforge_dependency,
+        mc_range_maven     : cfg.mc_range_maven,
+        mixin_compat       : cfg.mixin_compat,
+    ]
+    inputs.properties props
+    filesMatching(['META-INF/neoforge.mods.toml', 'beanify.mixins.json']) {
+        expand props
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = cfg['java'] as Integer
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion(cfg['java'])
+    targetCompatibility = JavaVersion.toVersion(cfg['java'])
+}
+
+jar {
+    from('../LICENSE') {
+        rename { "${it}_beanify" }
+    }
+}

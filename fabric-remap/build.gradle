@@ -1,0 +1,70 @@
+// Fabric + Quilt builds for Minecraft 1.16.5 - 1.21.11 (obfuscated game, Mojang mappings).
+// Build one target:   gradle build -PbeanTarget=fabric-1.20.2
+// Targets live in ../build-matrix.json
+import groovy.json.JsonSlurper
+
+plugins {
+    id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
+}
+
+def matrix = new JsonSlurper().parse(file("${rootDir}/../build-matrix.json"))
+def targetId = findProperty('beanTarget')
+def cfg = targetId ? matrix.targets.find { it.id == targetId } : matrix.targets.find { it.project == projectDir.name }
+if (cfg == null) {
+    throw new GradleException("Unknown beanTarget '${targetId}'. Valid ids: ${matrix.targets.findAll { it.project == projectDir.name }*.id}")
+}
+logger.lifecycle("Beanify target ${cfg.id}: Minecraft ${cfg.minecraft_version}, Java ${cfg['java']}, mixin variant ${cfg.mixin_variant}")
+
+version = project.mod_version
+group = 'dev.beanify'
+
+base {
+    archivesName = "beanify-fabric-${cfg.range_label}"
+}
+
+loom {
+    mixin {
+        defaultRefmapName = 'beanify.refmap.json'
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${cfg.minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+}
+
+sourceSets {
+    main {
+        java.srcDir "${rootDir}/../common/${cfg.mixin_variant}/java"
+        resources.srcDir "${rootDir}/../common/${cfg.mixin_variant}/resources"
+    }
+}
+
+processResources {
+    def props = [
+        version      : project.version.toString(),
+        mc_dependency: cfg.mc_dependency,
+        java         : cfg['java'].toString(),
+        mixin_compat : cfg.mixin_compat,
+    ]
+    inputs.properties props
+    filesMatching(['fabric.mod.json', 'beanify.mixins.json']) {
+        expand props
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = cfg['java'] as Integer
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion(cfg['java'])
+    targetCompatibility = JavaVersion.toVersion(cfg['java'])
+}
+
+jar {
+    from('../LICENSE') {
+        rename { "${it}_beanify" }
+    }
+}

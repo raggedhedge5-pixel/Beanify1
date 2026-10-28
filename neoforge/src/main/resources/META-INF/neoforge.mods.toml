@@ -1,0 +1,28 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "MIT"
+
+[[mods]]
+modId = "beanify"
+version = "${version}"
+displayName = "Beanify"
+description = '''
+Everyone becomes a bean: no arms, no leg swing, held items still visible. Client-side only.
+'''
+
+[[mixins]]
+config = "beanify.mixins.json"
+
+[[dependencies.beanify]]
+modId = "neoforge"
+type = "required"
+versionRange = "${neoforge_dependency}"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.beanify]]
+modId = "minecraft"
+type = "required"
+versionRange = "${mc_range_maven}"
+ordering = "NONE"
+side = "CLIENT"

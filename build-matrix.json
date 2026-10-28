@@ -1,0 +1,670 @@
+{
+  "_comment": "Single source of truth: read by every Gradle build (via -PbeanTarget=<id>) and by the GitHub Actions workflow. 'minecraft_version' is the version the jar is COMPILED against; 'game_versions' is what to tick on Modrinth.",
+  "targets": [
+    {
+      "id": "fabric-1.16",
+      "project": "fabric-remap",
+      "loaders": [
+        "fabric",
+        "quilt"
+      ],
+      "minecraft_version": "1.16.5",
+      "java": 8,
+      "mixin_compat": "JAVA_8",
+      "mixin_variant": "entity",
+      "mc_dependency": ">=1.16 <=1.16.5",
+      "range_label": "1.16.x",
+      "game_versions": [
+        "1.16",
+        "1.16.1",
+        "1.16.2",
+        "1.16.3",
+        "1.16.4",
+        "1.16.5"
+      ]
+    },
+    {
+      "id": "fabric-1.17",
+      "project": "fabric-remap",
+      "loaders": [
+        "fabric",
+        "quilt"
+      ],
+      "minecraft_version": "1.17.1",
+      "java": 16,
+      "mixin_compat": "JAVA_16",
+      "mixin_variant": "entity",
+      "mc_dependency": ">=1.17 <=1.17.1",
+      "range_label": "1.17.x",
+      "game_versions": [
+        "1.17",
+        "1.17.1"
+      ]
+    },
+    {
+      "id": "fabric-1.18",
+      "project": "fabric-remap",
+      "loaders": [
+        "fabric",
+        "quilt"
+      ],
+      "minecraft_version": "1.18.2",
+      "java": 17,
+      "mixin_compat": "JAVA_17",
+      "mixin_variant": "entity",
+      "mc_dependency": ">=1.18 <=1.18.2",
+      "range_label": "1.18.x",
+      "game_versions": [
+        "1.18",
+        "1.18.1",
+        "1.18.2"
+      ]
+    },
+    {
+      "id": "fabric-1.19",
+      "project": "fabric-remap",
+      "loaders": [
+        "fabric",
+        "quilt"
+      ],
+      "minecraft_version": "1.19.4",
+      "java": 17,
+      "mixin_compat": "JAVA_17",
+      "mixin_variant": "entity",
+      "mc_dependency": ">=1.19 <=1.19.4",
+      "range_label": "1.19.x",
+      "game_versions": [
+        "1.19",
+        "1.19.1",
+        "1.19.2",
+        "1.19.3",
+        "1.19.4"
+      ]
+    },
+    {
+      "id": "fabric-1.20.2",
+      "project": "fabric-remap",
+      "loaders": [
+        "fabric",
+        "quilt"
+      ],
+      "minecraft_version": "1.20.2",
+      "java": 17,
+      "mixin_compat": "JAVA_17",
+      "mixin_variant": "entity",
+      "mc_dependency": ">=1.20 <=1.20.2",
+      "range_label": "1.20-1.20.2",
+      "game_versions": [
+        "1.20",
+        "1.20.1",
+        "1.20.2"
+      ]
+    },
+    {
+      "id": "fabric-1.20.6",
+      "project": "fabric-remap",
+      "loaders": [
+        "fabric",
+        "quilt"
+      ],
+      "minecraft_version": "1.20.4",
+      "java": 17,
+      "mixin_compat": "JAVA_17",
+      "mixin_variant": "entity",
+      "mc_dependency": ">=1.20.4 <=1.20.6",
+      "range_label": "1.20.4-1.20.6",
+      "game_versions": [
+        "1.20.4",
+        "1.20.5",
+        "1.20.6"
+      ],
+      "note": "Compiled against 1.20.4 (Java 17 class files) with --release 17 so it also loads on 1.20.4's Java 17; 1.20.5/1.20.6 run it on Java 21."
+    },
+    {
+      "id": "fabric-1.21.1",
+      "project": "fabric-remap",
+      "loaders": [
+        "fabric",
+        "quilt"
+      ],
+      "minecraft_version": "1.21.1",
+      "java": 21,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "entity",
+      "mc_dependency": ">=1.21 <=1.21.1",
+      "range_label": "1.21-1.21.1",
+      "game_versions": [
+        "1.21",
+        "1.21.1"
+      ]
+    },
+    {
+      "id": "fabric-1.21.8",
+      "project": "fabric-remap",
+      "loaders": [
+        "fabric",
+        "quilt"
+      ],
+      "minecraft_version": "1.21.8",
+      "java": 21,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "state",
+      "mc_dependency": ">=1.21.3 <=1.21.8",
+      "range_label": "1.21.3-1.21.8",
+      "game_versions": [
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8"
+      ]
+    },
+    {
+      "id": "fabric-1.21.10",
+      "project": "fabric-remap",
+      "loaders": [
+        "fabric",
+        "quilt"
+      ],
+      "minecraft_version": "1.21.10",
+      "java": 21,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "avatar-old-pkg",
+      "mc_dependency": ">=1.21.9 <=1.21.10",
+      "range_label": "1.21.9-1.21.10",
+      "game_versions": [
+        "1.21.9",
+        "1.21.10"
+      ]
+    },
+    {
+      "id": "fabric-1.21.11",
+      "project": "fabric-remap",
+      "loaders": [
+        "fabric",
+        "quilt"
+      ],
+      "minecraft_version": "1.21.11",
+      "java": 21,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "avatar-player-pkg",
+      "mc_dependency": "1.21.11",
+      "range_label": "1.21.11",
+      "game_versions": [
+        "1.21.11"
+      ]
+    },
+    {
+      "id": "fabric-26.1",
+      "project": "fabric-unobf",
+      "loaders": [
+        "fabric",
+        "quilt"
+      ],
+      "minecraft_version": "26.1.2",
+      "java": 25,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "avatar-player-pkg",
+      "mc_dependency": ">=26.1 <=26.1.2",
+      "range_label": "26.1.x",
+      "game_versions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "quilt_note": "Quilt's meta server lists this game version; loading an unobfuscated Fabric-style jar on Quilt is untested."
+    },
+    {
+      "id": "fabric-26.2",
+      "project": "fabric-unobf",
+      "loaders": [
+        "fabric",
+        "quilt"
+      ],
+      "minecraft_version": "26.2",
+      "java": 25,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "avatar-player-pkg",
+      "mc_dependency": ">=26.2 <26.3",
+      "range_label": "26.2",
+      "game_versions": [
+        "26.2"
+      ],
+      "quilt_note": "Quilt's meta server lists this game version; loading an unobfuscated Fabric-style jar on Quilt is untested."
+    },
+    {
+      "id": "fabric-26.3",
+      "project": "fabric-unobf",
+      "loaders": [
+        "fabric",
+        "quilt"
+      ],
+      "minecraft_version": "26.3",
+      "java": 25,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "avatar-player-pkg",
+      "mc_dependency": ">=26.3 <26.4",
+      "range_label": "26.3",
+      "game_versions": [
+        "26.3"
+      ],
+      "quilt_note": "Quilt's meta server lists this game version; loading an unobfuscated Fabric-style jar on Quilt is untested."
+    },
+    {
+      "id": "neoforge-1.21.1",
+      "project": "neoforge",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraft_version": "1.21.1",
+      "neoforge_version": "21.1.265",
+      "java": 21,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "entity",
+      "mc_range_maven": "[1.21,1.21.1]",
+      "neoforge_dependency": "[21.0,21.2)",
+      "range_label": "1.21-1.21.1",
+      "game_versions": [
+        "1.21",
+        "1.21.1"
+      ]
+    },
+    {
+      "id": "neoforge-1.21.8",
+      "project": "neoforge",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraft_version": "1.21.8",
+      "neoforge_version": "21.8.57",
+      "java": 21,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "state",
+      "mc_range_maven": "[1.21.3,1.21.8]",
+      "neoforge_dependency": "[21.3,21.9)",
+      "range_label": "1.21.3-1.21.8",
+      "game_versions": [
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8"
+      ]
+    },
+    {
+      "id": "neoforge-1.21.10",
+      "project": "neoforge",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraft_version": "1.21.10",
+      "neoforge_version": "21.10.64",
+      "java": 21,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "avatar-old-pkg",
+      "mc_range_maven": "[1.21.9,1.21.10]",
+      "neoforge_dependency": "[21.9,21.11)",
+      "range_label": "1.21.9-1.21.10",
+      "game_versions": [
+        "1.21.9",
+        "1.21.10"
+      ]
+    },
+    {
+      "id": "neoforge-1.21.11",
+      "project": "neoforge",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraft_version": "1.21.11",
+      "neoforge_version": "21.11.48",
+      "java": 21,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "avatar-player-pkg",
+      "mc_range_maven": "[1.21.11]",
+      "neoforge_dependency": "[21.11,21.12)",
+      "range_label": "1.21.11",
+      "game_versions": [
+        "1.21.11"
+      ]
+    },
+    {
+      "id": "neoforge-26.1",
+      "project": "neoforge",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraft_version": "26.1.2",
+      "neoforge_version": "26.1.2.124",
+      "java": 25,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "avatar-player-pkg",
+      "mc_range_maven": "[26.1,26.2)",
+      "neoforge_dependency": "[26.1,26.2)",
+      "range_label": "26.1.x",
+      "game_versions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ]
+    },
+    {
+      "id": "neoforge-26.2",
+      "project": "neoforge",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraft_version": "26.2",
+      "neoforge_version": "26.2.0.93",
+      "java": 25,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "avatar-player-pkg",
+      "mc_range_maven": "[26.2,26.3)",
+      "neoforge_dependency": "[26.2,26.3)",
+      "range_label": "26.2",
+      "game_versions": [
+        "26.2"
+      ]
+    },
+    {
+      "id": "neoforge-26.3",
+      "project": "neoforge",
+      "loaders": [
+        "neoforge"
+      ],
+      "minecraft_version": "26.3",
+      "neoforge_version": "26.3.0.99",
+      "java": 25,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "avatar-player-pkg",
+      "mc_range_maven": "[26.3,26.4)",
+      "neoforge_dependency": "[26.3,26.4)",
+      "range_label": "26.3",
+      "game_versions": [
+        "26.3"
+      ]
+    },
+    {
+      "id": "forge-1.16",
+      "project": "forge",
+      "loaders": [
+        "forge"
+      ],
+      "minecraft_version": "1.16.5",
+      "forge_version": "36.2.34",
+      "forge_major": 36,
+      "java": 8,
+      "mixin_compat": "JAVA_8",
+      "mixin_variant": "entity",
+      "range_label": "1.16.x",
+      "game_versions": [
+        "1.16",
+        "1.16.1",
+        "1.16.2",
+        "1.16.3",
+        "1.16.4",
+        "1.16.5"
+      ]
+    },
+    {
+      "id": "forge-1.17",
+      "project": "forge",
+      "loaders": [
+        "forge"
+      ],
+      "minecraft_version": "1.17.1",
+      "forge_version": "37.1.1",
+      "forge_major": 37,
+      "java": 16,
+      "mixin_compat": "JAVA_16",
+      "mixin_variant": "entity",
+      "range_label": "1.17.x",
+      "game_versions": [
+        "1.17",
+        "1.17.1"
+      ]
+    },
+    {
+      "id": "forge-1.18",
+      "project": "forge",
+      "loaders": [
+        "forge"
+      ],
+      "minecraft_version": "1.18.2",
+      "forge_version": "40.3.0",
+      "forge_major": 38,
+      "java": 17,
+      "mixin_compat": "JAVA_17",
+      "mixin_variant": "entity",
+      "range_label": "1.18.x",
+      "game_versions": [
+        "1.18",
+        "1.18.1",
+        "1.18.2"
+      ]
+    },
+    {
+      "id": "forge-1.19",
+      "project": "forge",
+      "loaders": [
+        "forge"
+      ],
+      "minecraft_version": "1.19.4",
+      "forge_version": "45.4.0",
+      "forge_major": 41,
+      "java": 17,
+      "mixin_compat": "JAVA_17",
+      "mixin_variant": "entity",
+      "range_label": "1.19.x",
+      "game_versions": [
+        "1.19",
+        "1.19.1",
+        "1.19.2",
+        "1.19.3",
+        "1.19.4"
+      ]
+    },
+    {
+      "id": "forge-1.20.1",
+      "project": "forge",
+      "loaders": [
+        "forge"
+      ],
+      "minecraft_version": "1.20.1",
+      "forge_version": "47.4.28",
+      "forge_major": 46,
+      "java": 17,
+      "mixin_compat": "JAVA_17",
+      "mixin_variant": "entity",
+      "range_label": "1.20-1.20.1",
+      "game_versions": [
+        "1.20",
+        "1.20.1"
+      ]
+    },
+    {
+      "id": "forge-1.20.2",
+      "project": "forge",
+      "loaders": [
+        "forge"
+      ],
+      "minecraft_version": "1.20.2",
+      "forge_version": "48.1.0",
+      "forge_major": 48,
+      "java": 17,
+      "mixin_compat": "JAVA_17",
+      "mixin_variant": "entity",
+      "range_label": "1.20.2",
+      "game_versions": [
+        "1.20.2"
+      ]
+    },
+    {
+      "id": "forge-1.20.4",
+      "project": "forge",
+      "loaders": [
+        "forge"
+      ],
+      "minecraft_version": "1.20.4",
+      "forge_version": "49.2.13",
+      "forge_major": 49,
+      "java": 17,
+      "mixin_compat": "JAVA_17",
+      "mixin_variant": "entity",
+      "range_label": "1.20.4",
+      "game_versions": [
+        "1.20.4"
+      ]
+    },
+    {
+      "id": "forge-1.20.6",
+      "project": "forge",
+      "loaders": [
+        "forge"
+      ],
+      "minecraft_version": "1.20.6",
+      "forge_version": "50.2.14",
+      "forge_major": 50,
+      "java": 21,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "entity",
+      "range_label": "1.20.6",
+      "game_versions": [
+        "1.20.6"
+      ]
+    },
+    {
+      "id": "forge-1.21.1",
+      "project": "forge",
+      "loaders": [
+        "forge"
+      ],
+      "minecraft_version": "1.21.1",
+      "forge_version": "52.1.20",
+      "forge_major": 51,
+      "java": 21,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "entity",
+      "range_label": "1.21-1.21.1",
+      "game_versions": [
+        "1.21",
+        "1.21.1"
+      ]
+    },
+    {
+      "id": "forge-1.21.8",
+      "project": "forge",
+      "loaders": [
+        "forge"
+      ],
+      "minecraft_version": "1.21.8",
+      "forge_version": "58.1.26",
+      "forge_major": 53,
+      "java": 21,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "state",
+      "range_label": "1.21.3-1.21.8",
+      "game_versions": [
+        "1.21.3",
+        "1.21.4",
+        "1.21.5",
+        "1.21.6",
+        "1.21.7",
+        "1.21.8"
+      ]
+    },
+    {
+      "id": "forge-1.21.10",
+      "project": "forge",
+      "loaders": [
+        "forge"
+      ],
+      "minecraft_version": "1.21.10",
+      "forge_version": "60.1.18",
+      "forge_major": 59,
+      "java": 21,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "avatar-old-pkg",
+      "range_label": "1.21.9-1.21.10",
+      "game_versions": [
+        "1.21.9",
+        "1.21.10"
+      ]
+    },
+    {
+      "id": "forge-1.21.11",
+      "project": "forge",
+      "loaders": [
+        "forge"
+      ],
+      "minecraft_version": "1.21.11",
+      "forge_version": "61.2.4",
+      "forge_major": 61,
+      "java": 21,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "avatar-player-pkg",
+      "range_label": "1.21.11",
+      "game_versions": [
+        "1.21.11"
+      ]
+    },
+    {
+      "id": "forge-26.1",
+      "project": "forge",
+      "loaders": [
+        "forge"
+      ],
+      "minecraft_version": "26.1.2",
+      "forge_version": "64.1.5",
+      "forge_major": 62,
+      "java": 25,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "avatar-player-pkg",
+      "range_label": "26.1.x",
+      "game_versions": [
+        "26.1",
+        "26.1.1",
+        "26.1.2"
+      ],
+      "unobfuscated": true
+    },
+    {
+      "id": "forge-26.2",
+      "project": "forge",
+      "loaders": [
+        "forge"
+      ],
+      "minecraft_version": "26.2",
+      "forge_version": "65.1.5",
+      "forge_major": 65,
+      "java": 25,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "avatar-player-pkg",
+      "range_label": "26.2",
+      "game_versions": [
+        "26.2"
+      ],
+      "unobfuscated": true
+    },
+    {
+      "id": "forge-26.3",
+      "project": "forge",
+      "loaders": [
+        "forge"
+      ],
+      "minecraft_version": "26.3",
+      "forge_version": "66.1.0",
+      "forge_major": 66,
+      "java": 25,
+      "mixin_compat": "JAVA_21",
+      "mixin_variant": "avatar-player-pkg",
+      "range_label": "26.3",
+      "game_versions": [
+        "26.3"
+      ],
+      "unobfuscated": true
+    }
+  ]
+}
