@@ -1,0 +1,50 @@
+name: Build all jars
+
+# Builds one jar per target in build-matrix.json. Run it from the Actions tab ("Run workflow"),
+# then download each "beanify-<target>" artifact and upload it to Modrinth.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      targets: ${{ steps.m.outputs.targets }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        # Gradle itself needs at least JDK 21; the mod is still compiled with --release <target java>.
+        run: |
+          echo "targets=$(jq -c '[.targets[] | {id, project, java: (if .java < 21 then 21 else .java end)}]' build-matrix.json)" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: matrix
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false # one broken target must not hide the others
+      matrix:
+        target: ${{ fromJson(needs.matrix.outputs.targets) }}
+    name: ${{ matrix.target.id }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.target.java }}
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          # Architectury Loom (Forge) is the one most likely to lag behind a brand-new Gradle.
+          gradle-version: ${{ matrix.target.project == 'forge' && '8.14.3' || 'current' }}
+      - name: Build
+        working-directory: ${{ matrix.target.project }}
+        run: gradle build -PbeanTarget=${{ matrix.target.id }} --no-daemon --stacktrace
+      - uses: actions/upload-artifact@v4
+        with:
+          name: beanify-${{ matrix.target.id }}
+          path: |
+            ${{ matrix.target.project }}/build/libs/*.jar
+            !${{ matrix.target.project }}/build/libs/*-sources.jar
+            !${{ matrix.target.project }}/build/libs/*-dev.jar
+          if-no-files-found: error
