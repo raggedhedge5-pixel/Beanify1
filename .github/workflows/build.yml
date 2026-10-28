@@ -39,7 +39,23 @@ jobs:
           gradle-version: ${{ matrix.target.project == 'forge' && '8.14.3' || 'current' }}
       - name: Build
         working-directory: ${{ matrix.target.project }}
-        run: gradle build -PbeanTarget=${{ matrix.target.id }} --no-daemon --stacktrace
+        shell: bash
+        run: |
+          set -o pipefail
+          gradle build -PbeanTarget=${{ matrix.target.id }} --no-daemon --stacktrace 2>&1 | tee ../build.log
+      - name: Show errors on the run summary page
+        if: failure()
+        shell: bash
+        run: |
+          {
+            echo "### FAILED: ${{ matrix.target.id }}"
+            echo '```'
+            grep -E -m15 -A2 'error:' build.log | cut -c1-250 || true
+            grep -m1 -A18 'What went wrong' build.log | cut -c1-250 || true
+            echo '--- last lines ---'
+            tail -n 15 build.log | cut -c1-250
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
           name: beanify-${{ matrix.target.id }}
