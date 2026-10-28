@@ -1,0 +1,14 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "dev.beanify.mixin",
+  "compatibilityLevel": "${mixin_compat}",
+  "client": [
+    "HumanoidArmorLayerMixin",
+    "HumanoidModelMixin",
+    "PlayerModelMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}
